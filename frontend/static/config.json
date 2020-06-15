@@ -1,8 +1,8 @@
 {
-    "httpServer": "http://localhost:8088/dmserver",
-    "httpOauth": "http://localhost:8082/oauth",
-    "httpClient": "http://localhost:8089",
-    "socketServer": "localhost",
+    "httpServer": "http://192.168.30.118:8088/dmserver",
+    "httpOauth": "http://192.168.30.118:8082/oauth",
+    "httpClient": "http://192.168.30.118:8089",
+    "socketServer": "192.168.30.118",
     "socketPort": 9020,
     "title": "数据挖掘建模平台",
     "databaseUploadFileSize": 10,
