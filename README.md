@@ -1,8 +1,5 @@
 # Introduction #
-TipDM建模平台，是由广东泰迪智能科技股份有限公司研发并开源的数据挖掘工具，TipDM建模平台提供数据丰富的数据预处理、
-数据分析与数据挖掘组件，帮助广大中小企业快速建立数据挖掘工程，提升数据处理的效能。同时，我们也在积极
-推动大数据挖掘社区建设，构建校企对接桥梁，为企业精准推送优质大数据挖掘人才；在产业需求的基础上推动高
-校的人才培养工作。
+TipDM建模平台分支维护版
 
 # Documentation #
 [使用文档](http://python.tipdm.org/bzzx/index.jhtml?n=%E6%93%8D%E4%BD%9C%E6%96%87%E6%A1%A3)
@@ -38,67 +35,60 @@ TipDM建模平台，是由广东泰迪智能科技股份有限公司研发并开
 - IntelliJ Idea IDE(可选，您也可以使用其他IDE，如eclipse、NetBeans)，安装详情可参考[IntelliJ安装教程](https://www.jetbrains.com/help/idea/installing-and-launching.html)
 
 ### 安装Java开发环境 ###
-下载JDK 1.8.x和Apache-Maven并安装，设置JAVA_HOME和PATH环境变量，如添加以下到~/.bashrc中（不同的操作系统，环境变量的设置方式有所不同，请根据自己的情况设置环境变量）： 
-    echo 'export JAVA_HOME=~/jdk_1.8.0_171' >> ~/.bashrc  
-    echo 'export PATH=$JAVA_HOME/bin:~/apache-maven-3.3.9/bin:$PATH' >> ~/.bashrc
-    . ~/.bashrc
+略
+### Python3环境配置 ###
+```
+# 创建python3虚拟环境
+python3 -m venv python3_venv
 
-检查java与maven环境及版本是否正确安装，运行如下命令检查：
-> tipdm: ~ devp$ javac -version  
-> javac 1.8.0_171  
-> tipdm: ~ devp$ mvn -version  
-> Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-11T00:41:47+08:00)   
+# 激活(进入)虚拟环境
+source ./python3_venv/bin/activate
 
-如果返回"-bash: xxx: command not found"，或者版本号低于TipDM要求，请确认依赖软件是否安装正确，相应的环境变量是否设置生效。
+# 在虚拟环境安装所需依赖
+pip install numpy==1.16.4 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install arch==4.4.1 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install docx==0.2.4 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install gensim==3.6.0 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install graphviz==0.10.1 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install jieba==0.38 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install jieba-fast==0.53 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install matplotlib==2.2.2 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install pandas==0.23.4 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install pdfminer3k==1.3.1 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install pyclust==0.2.0 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install pydot==1.2.4 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install python-docx==0.8.10 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install scikit-learn==0.19.1 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install scipy==0.19.1 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install SQLAlchemy==1.2.0 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install scikit-learn==0.19.1 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install statsmodels==0.9.0 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install tensorflow==1.14.0 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install thulac==0.2.0 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install wordcloud==1.5.0 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install psycopg2 -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install joblib -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
+pip install matplot -i http://pypi.douban.com/simple --trusted-host pypi.douban.com
 
-### 安装Python ###
+# 退出虚拟环境
+deactivate
+```
+### 安装并初始化PostgreSQL ###
+    yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+    yum install postgresql96-server
+    
+    # 初始化数据库并启用自动启动
+    /usr/pgsql-9.6/bin/postgresql96-setup initdb
+    systemctl enable postgresql-9.6
+    systemctl start postgresql-9.6
+    
+    # 进入postgres用户(安装pgsql时自动创建的用户)，然后psql进入tipdm库(自行创建)，执行初始化脚本
+    su - postgres
+    psql tipdm
+    tipdm=# \i /root/sql/initData.sql
 
-   下载Python 3.6.x，并完成环境变量的配置。
-   
-   required library:
-   
-   	arch==4.3.1
-	docx==0.2.4
-	gensim==3.6.0
-	graphviz==0.10.1
-	jieba==0.38
-	jieba-fast==0.53
-	Keras==2.2.4
-	matplotlib==2.2.0
-	numpy==1.14.2
-	pandas==0.23.4
-	pdfminer3k==1.3.1
-	pyclust==0.2.0
-	pydot==1.2.4
-	python-docx==0.8.10
-	scikit-learn==0.19.1
-	scipy==0.19.1
-	SQLAlchemy==1.2.0
-	statsmodels==0.9.0
-	tensorflow==1.12.0
-	thulac==0.2.0
-	wordcloud==1.5.0
-	
-#### 批量安装依赖库 ####
-将上面的内容粘贴至requirements.txt（**可随意命名**），进入命令行，CD到requirements.txt所在的目录下，执行命令：
-
-	pip install -r requirements.txt
-   	
-### 安装PostgreSQL ###
-  
-   下载9.4x并完成安装。[PostgreSQL中文社区](http://www.postgres.cn)
 ## 快速入门 ##
-### 构建项目 ###
-#### backend ####
-下载源代码至本地,按照maven格式将源码导入IDE（Eclipse或IDEA）
-##### 数据初始化 #####
-首先在本机上要有PostgreSQL服务，使它监听127.0.0.1的5432端口（默认安装和初始化的PostgreSQL即监听127.0.0.1的5432端口），然后使用PG的管理员身份(一般是初始化PG数据库的linux账号,这里是postgres账户)，运行$TipDM_HOME/WEB-INF/classes/sql/目录下的.sql脚本，初始化元数据：
-
-    psql -h 127.0.0.1 -p 5432 -U postgres -d tipdm_DB -f initData.sql
-    psql -h 127.0.0.1 -p 5432 -U postgres -d tipdm_DB -f quartz_postgres.sql
-
-##### 系统配置 #####
-配置文件说明：
+##### 配置文件说明 #####
 
 	sysconfig/database.properties			数据库配置文件
 	sysconfig/dbSupport.config			在此配置系统可支持的数据库类型
@@ -106,22 +96,26 @@ TipDM建模平台，是由广东泰迪智能科技股份有限公司研发并开
 	sysconfig/redis.properties			Redis
 	PyConnection.xml				Python服务(该文件在sysconfig目录的上层)
 
-##### 编译 #####
-	cd进入到源码根目录，使用maven进行编译即可，源码结构如下：
+##### 源码模块说明 #####
+
 	framework-common		公共模块
 	framework-model  		数据模型
 	framework-persist 		数据持久化
 	framework-service 		service
 	tipdm-server  			后台服务
 
-看到
-> BUILD SUCCESS  
-> Total time: ...  
-
-表示编译成功，生成的二进制包在$HOME/target/目录中。 
-
-##### 部署 #####
-部署详情参考[IntelliJ IDEA – Run / debug web application on Tomcat](https://www.mkyong.com/intellij/intellij-idea-run-debug-web-application-on-tomcat/)
-
-# FAQ #
-[http://python.tipdm.org/bzzx/index.jhtml?n=%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98](http://python.tipdm.org/bzzx/index.jhtml?n=%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)
+### 注意事项
+1. tomcat不要放在有空格和中文的路径下，否则调用DataX会出问题
+1. 测试用表添加权限
+    
+    GRANT ALL ON ALL tables in schema "admin" to admin;
+1. 执行python命令处，添加进入python3虚拟环境语句
+```
+com.tipdm.framework.dmserver.pyserve.PySftpProgressMonitor
+String command = "export LANG=zh_CN.UTF-8;" +
+             "export LC_CTYPE=zh_CN.UTF-8;" +
+             "export LC_ALL=zh_CN.UTF-8; " +
+            // 进入python3虚拟环境
+            "source /root/venv/bin/activate;"+
+             "python {}";
+```
