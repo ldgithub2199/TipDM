@@ -64,7 +64,7 @@ public class PySftpProgressMonitor implements SftpProgressMonitor {
             command = MessageFormatter.format(command, dest).getMessage();
             logger.info("exec command: {}", command);
             channelExec.setCommand(command);
-            in = new BufferedReader(new InputStreamReader(channelExec.getErrStream()));
+            in = new BufferedReader(new InputStreamReader(channelExec.getErrStream(),"UTF8"));
             channelExec.connect();
 
             String msg = null;

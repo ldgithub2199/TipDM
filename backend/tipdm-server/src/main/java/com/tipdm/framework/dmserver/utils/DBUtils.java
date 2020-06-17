@@ -118,7 +118,7 @@ public final class DBUtils {
         public String call() throws Exception {
             try {
                 StringBuffer stringBuffer = new StringBuffer();
-                InputStreamReader isr = new InputStreamReader(is);
+                InputStreamReader isr = new InputStreamReader(is,"UTF8");
                 BufferedReader br = new BufferedReader(isr);
                 String line = null;
                 while ((line = br.readLine()) != null) {
