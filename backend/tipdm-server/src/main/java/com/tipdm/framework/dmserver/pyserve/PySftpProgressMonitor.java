@@ -59,7 +59,7 @@ public class PySftpProgressMonitor implements SftpProgressMonitor {
                              "export LC_CTYPE=zh_CN.UTF-8;" +
                              "export LC_ALL=zh_CN.UTF-8; " +
 //                    进入虚拟环境
-                    "source /root/venv/bin/activate;"+
+                    "source /opt/software/python3_venv/bin/activate;"+
                              "python {}";
             command = MessageFormatter.format(command, dest).getMessage();
             logger.info("exec command: {}", command);

@@ -2,6 +2,6 @@
 <PyConnectionPool>
     <PyConfiguration>
         <!-- 可配置多个PyServer -->
-        <PyServer host="192.168.127.128" sshuser="root" sshpwd="root" sshport="22"/>
+        <PyServer host="192.168.100.80" sshuser="root" sshpwd="Huawei12#$" sshport="22"/>
     </PyConfiguration>
 </PyConnectionPool>
